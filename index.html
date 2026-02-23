@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asami MBTI</title>
+    <link rel="stylesheet" href="css/style.css">
+<style>
+        body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+.article-container {
+    width: 60%;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    text-align: left;
+}
+
+.article-title {
+    font-size: 40px;
+    color: #333;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.article-meta{
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+
+}
+
+.article-h3{
+    font-size: 30px;
+    color: #333;
+    text-align: center;
+    margin-top: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.article-h2{
+    font-size: 28px;
+    color: #333;
+    margin-top: 30px;
+    font-family: 'Batang', 'Times New Roman', Times, serif;
+}
+.article-content {
+    font-size: 20px;
+    color: #555;
+    line-height: 40px;
+    font-family:Arial, Helvetica, sans-serif
+}
+.quiz-container {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  margin: 30px auto;
+}
+h2 {
+  color: #333;
+}
+.question {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.choice-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: 2px solid #4caf50;
+  background: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.choice-btn:hover {
+  background: #4caf50;
+  color: white;
+}
+.result {
+  display: none;
+  text-align: center;
+}
+.result h2 {
+  font-size: 28px;
+  color: #4caf50;
+  margin-bottom: 15px;
+}
+.score-display {
+  font-size: 18px;
+  color: #666;
+  margin: 20px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #4caf50;
+    transition: width 0.3s ease;
+}
+
+.axis-scores {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 30px 0;
+    text-align: left;
+}
+
+.axis-score {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #4caf50;
+}
+
+.axis-name {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.axis-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.axis-type {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.result-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.restart-btn {
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.restart-btn:hover {
+    transform: scale(1.05);
+    background: #45a049;
+}
+
+.bbs {
+
+  margin-bottom: 3em;
+
+}
+
+.bs {
+
+  margin-bottom: 2em;
+
+}
+
+.ss {
+
+  margin-bottom: 0.5em;
+
+}
+
+.agenda-section {
+   width: 60%;
+   margin: 50px auto;
+   background: white;
+   padding: 30px;
+   border-radius: 10px;
+   box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+}
+
+.agenda-title {
+  font-size: 28px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.agenda-list {
+    list-style: none;
+    padding: 0;
+}
+
+.agenda-list li {
+    margin: 15px 0;
+}
+
+a {
+  text-decoration: none;
+  color: hotpink;
+}
+
+a:hover {
+  text-decoration: none;
+  color: crimson;
+}
+
+#backtotopbtn {
+    text-align: center;
+    color: hotpink;
+    text-decoration: none;
+    font-size: 20px;
+}
+    </style>
+
+</head>
+<body>
+    <span>
+     <header></header>
+     <main></main>
+     <div class="article-container">
+     <h1 class="article-title" id="jump-to-top">What is your learning style?</h1>
+     <p class="article-meta">By Asami Takasaki on Feburary 23, 2026</p>
+     <div style="text-align: center;">
+         <img id="usagi-image" src="images/usagi.png" alt="aaa" width="500px">
+     </div>
+     <div class="article-content">
+      <ul>
+        <li><a class="a" href="#jump1">1. Introduction</a></li>
+        <li><a class="a" href="#jump2">2. Chronotype</a></li>
+        <li><a class="a" href="#jump3">3. With Friends?</a></li>
+        <li><a class="a" href="#jump4">4. Environment</a></li>
+        <li><a class="a" href="#jump5">5. Planner or Activist</a></li>
+        <li><a class="a" href="#jump6">6. Start Quiz</a></li>
+      </ul>
+
+     <h2 id="jump1">Introduction</h2>
+     <p class="bs">Have you ever thought that "Why  can the person finish homework faster than me?" or "Why do they learn something new faster than me? ," "What's the difference between me and them?" 
+     </p><p class="bbs">I have thought like that for countless times sadly. As some of you know, there are several factors affecting learning ability, including environment, time, noise, and of course your personality. Most students have gone through trial and error to find out how do they get more engaged and efficiently when they work on their task. I am also the student who's been struggling to find out the best way to learn something new and get a good score on the exam. First time, I failed. Second time, I failed again. Third time, I realized that I should know about myself first. </p>
+     
+     <p class="bbs">Eventually, that experience became the catalyst for undertaking this project though, in this website, we'll break down the 16 types of learning styles and give pratical tips for how you cnalyze personality. Therefore, this project is for myself and of course for everyone. I will hope you to find out your best way to make your life more fulfilling and enjoyable. Before learning about your unique learning style, here are some principles behind these learning styles.</p>
+     
+     <p class="bbs"></p>
+     
+     <h2 id="jump2">Chronotype</h2>
+     <p class="bbs">Chronotype refers to your natural tendency to be more alert and active at certain times of the day. Some people are naturally more alert in the morning, what is called "Early Bird" while others are more alert in the evening, what is called "Night Owl." Understanding your chronotype can help you optimize your study schedule.</p>
+     <p class="bbs">Morning activities are best suited for the early morning hours. After lunch, concentration temporarily drops and drowsiness is more likely to set in. Since work efficiency declines during this time, taking a nap of about 20 minutes allows you to tackle tasks efficiently afterward with a refreshed mind. In the morning, your brain is reset from sleep. This time of day carries less fatigue and stress from the previous day, making you ready to absorb new information. Additionally, recalling what you learned the day before from a fresh state can help solidify memories. Leverage the strengths of being a morning person! Wake up early to achieve your goals and significantly boost your productivity for the entire day.</p>
+     <p class="bbs">On the other hand, night owls are more alert and productive in the evening. They may find it easier to focus and be creative during nighttime hours.  This suits people who don't perform well in the morning but feel their minds sharpen in the evening. Another appealing aspect is that late at night, there are fewer messages from friends or social media updates compared to daytime, reducing smartphone temptations. One piece of advice is to develop the habit of being able to switch back to mornings if needed. Nighttime makes it easier to extend study hours, and cutting back on sleep allows for longer study sessions. However, these risks disrupting your daily rhythm. If your habits make it difficult to wake up in the morning, it could lead to poor health and decreased performance. Furthermore, important exams and entrance tests are almost always held in the morning. Therefore, make sure you can switch to a morning routine when necessary. If you get used to your nighttime activities, you will not be able to display your ability because your brain will not be activated. For research purposes, scientists have developed several questionnaires that categorize subjects by morning type versus evening type tendencies.</p>
+     
+     <h2 id="jump3">With Friends?</h2>
+     <p class="bbs">There are two types of people, those who learn better in a group and those who learn better alone. Let's call the first type "Social Learners" and the other type "Solitary Learners". Social learners are often extroverts. Some simply enjoy interacting with others, while others ruminate their own knowledge by teaching others. Studying alone or with friends—this is probably an eternal debate among students. Anyone who's tried group study has likely experienced this: you start studying because a friend invited you, but they keep asking questions, distracting you, or start talking about other things, making it impossible to focus. After all, your level of concentration changes depending on who you're with, and some people actually find it harder to focus when others are around. This ties into the discussion about environment later, but understanding your own personality is the most important thing. Those easily swayed by others will likely be distracted even when studying with someone. Conversely, self-assured individuals can focus on their tasks even if others around them are doing different things. Kind-hearted people who worry too much about others are overwhelmingly more efficient when alone. Definitely test which type you are.</p>
+     
+     <h2 id="jump4">Environment</h2>
+     <p class="bbs">The environment greatly effects people. Japanese people often care about others deeply. Those who extend this concern to even the smallest details of daily life can wear themselves out mentally by constantly being around others. Such people need a safe, secure environment where they feel at ease. If your home is a safe environment, working there is most efficient. Finding a dedicated workspace with your own set spot can also boost productivity. Conversely, people who struggle to concentrate or discipline themselves in their own room need the feeling of being watched by others. Places like cafes or libraries suit them better. If you find yourself slacking off or constantly checking your phone when alone in your room, you need to take the plunge and step into a new environment.</p>
+     
+     <h2 id="jump5">Planner or Activist</h2>
+     <p class="bbs">Some people prefer to plan their study sessions in advance, while others prefer to dive in and adapt as they go. The former are called "Planners" and the latter are "Activists". Planners tend to be more organized and methodical, while Activists are more spontaneous and flexible. Understanding your preference can help you choose the most effective study approach for your learning style. Perfectionists find meaning even in thoroughly completing every task they set for themselves. While maintaining that motivation is admirable, rigidly planning everything from the start can limit your actions. Those whose moods shift easily aren't suited to meticulously planning their studies. Set broad goals, but remember: the heart of studying is consistency. It's crucial to find ways to keep yourself in a good mood and enjoy learning, using whatever methods work for you.</p>
+     <h3 id="jump6" class="article-h3">↓↓↓Let's find out your learning style!↓↓↓</h3>
+    </span>   
+    <!--ここから診断スタート-->
+
+    <div class="quiz-container">
+        <div id="quiz-area">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <p class="question" id="question"></p>
+            <div id="choices"></div>
+        </div>
+
+        <div class="result" id="result">
+            <h2 id="result-title"></h2>
+            <p class="score-display">Your Learning Style</p>
+            
+            <div class="axis-scores">
+                <div class="axis-score">
+                    <div class="axis-name">Chronotype</div>
+                    <div class="axis-value" id="chronotype-score">0</div>
+                    <div class="axis-type" id="chronotype-type"></div>
+                </div>
+                <div class="axis-score">
+                    <div class="axis-name">Environment</div>
+                    <div class="axis-value" id="withtype-score">0</div>
+                    <div class="axis-type" id="withtype-type"></div>
+                </div>
+                <div class="axis-score">
+                    <div class="axis-name">Place</div>
+                    <div class="axis-value" id="placetype-score">0</div>
+                    <div class="axis-type" id="placetype-type"></div>
+                </div>
+                <div class="axis-score">
+                    <div class="axis-name">Style</div>
+                    <div class="axis-value" id="practicaltype-score">0</div>
+                    <div class="axis-type" id="practicaltype-type"></div>
+                </div>
+            </div>
+            
+            <p class="result-desc" id="result-desc"></p>
+            
+            <button class="restart-btn" onclick="location.reload()">Try again</button>
+        </div>
+    </div>
+    <a href="#jump-to-top" id="backtotopbtn">Back to top↑↑↑</a>
+     </div>
+
+
+<script>
+    // デバッグ用：ここで確認
+    console.log("スクリプト開始");
+
+    // 16タイプの学習スタイルの説明
+    const learningStyles = {
+        "朝型-一人-家-計画": {
+            name: "📚 Independent morning student",
+            description: "You're the type who wakes up early and studies methodically. With your self-discipline, your can make your alone time more effective, so learning at your own pace at home without worrying about other's thinking is the fastest way to success. There are only few students like you, so leverage your strengths to stand out from the crowd! Valuing your daily routine will help you study more efficiently."
+        },
+        "朝型-一人-家-衝動": {
+            name: "🐈 Fickle Cat",
+            description: "You're a free-spirited type who is good at waking up early. Since you're fundamentally honest about what you want to do, your study efficiency tends to rise when you work freely in a comfortable environment. Your unique ability lies in carrying on necessary tasks steadilyon your own. Levrage your talent! Since your productivity changes based on your mood, so you should pay attention to your emotional state while cherishing your curiosity and concentration as you pursue your studies."
+        },
+        "朝型-一人-外-計画": {
+            name: "🌞 Energetic Tiger",
+            description: "You're an outdoor enthusiast who thrives on morning energy, making learning outdoors most effective for you. As an adventurer who values alone time, you tend to get distracted at home. By moving between new environments, you can stay stimulated while boosting your productivity. Your strength is your ability to adapt to new environments. Leverage your talent! Since your productivity changes based on your mood, so you shoul pay attention to your emotional state while cherishing your curiosity and concentration as you improve your studies."
+        },
+        "朝型-一人-外-衝動": {
+            name: "🐬 Impulsive Dolphin",
+            description: "As a morning-type adventurer, you're not great at meticulous planning—you're the type to act on impulse. You excel at tackling new challenges, and the quickest way to unlock your talents is to take on diverse experiences alone in various environments. Leverage this unique trait by focusing your activities in the morning. Your productivity may fluctuate based on your mood, so it's important to pay attention to your emotional state while nurturing your curiosity and concentration as you pursue your studies."
+        },
+        "朝型-グループ-家-計画": {
+            name: "👥Teamwork Leader",
+            description: "You're the type who often holds study sessions with friends. With your strong sense of self and ability to discipline yourself, you're a natural leader who actively guides others within the group. People often rely on someone like you, so while cherishing your alone time, study efficiently and nurture your talents. Since you're easily influenced by your surroundings, studying in places like family restaurants isn't ideal for you. Tackle your studies in an environment where you feel secure. Surprisingly, studying at karaoke might actually suit you well, but most students starts singing, so I don't recommend it."
+        },
+        "朝型-グループ-家-衝動": {
+            name: "🎉 Friendly Horse",
+            description: "You're the type who enjoys studying in a lively, fun atmosphere with friends, even if you're moody at times. While you often let the mood of the moment guide your learning, focusing properly when needed will increase your efficiency. Your sociability is innate. Just pay attention not to get swept up by those around you, and make sure to enjoy your study time. Studying with friends who are also morning people, like you, will be productive. To ensure things stay lively, it's recommended to study at someone's house rather than a quiet cafe."
+        },
+        "朝型-グループ-外-計画": {
+            name: "🚀 Active Diplomat",
+            description: "As an energetic student, you can significantly boost your work efficiency and productivity by tackling tasks systematically from the morning onward and motivating each other with like-minded friends. You excel at adapting to various environments without being tied to one place, so the barrier to exploring different locations is lower for you than for other students. Since you're very active, make sure to carve out some personal time and space for yourself while pursuing your studies."
+        },
+        "朝型-グループ-外-衝動": {
+            name: "🌟 Active Moodmaker",
+            description: "You're a natural mood-maker with strong teamwork skills and excellent adaptability. Your performance will improve when you freely manage your time and pursue your interests to your heart's content. Since you often study with others, you're likely skilled at seeing yourself objectively—but don't forget to check in on yourself occasionally. Placing yourself in diverse environments and seeking stimulation should boost your productivity. Stay mindful of your surroundings while dedicating yourself to your studies."
+        },
+        "夜型-一人-家-計画": {
+            name: "🌙 Night Researcher",
+            description: "You're the type who pushes yourself alone late at night when everyone else is asleep. With your aptitude for deep thinking and methodical study habits, those around you will be amazed to see your grades improve. So, stoic as you are, make sure to adjust your schedule to avoid staying up all night while you keep up your studies."
+        },
+        "夜型-一人-家-衝動": {
+            name: "🦉 Fickle Night Owl",
+            description: "You are a night student who learns freely at your own pace. With your flexibility, unbound by rigid schedules, you can boost your productivity by studying at home or in an environment where you feel comfortable. Pursue your interests as much as you like. However, from a health perspective, be mindful of consecutive all-nighters."
+        },
+        "夜型-一人-外-計画": {
+            name: "🌃 Night Giraffe",
+            description: "You're the type who concentrates best in cafes and such during the evening and night, when most people have finished their daytime activities. Since you adapt easily to new environments, venturing out to various places will lift your spirits. Rather than going with someone else, you prefer to savor that thrill alone and tackle your studies methodically, so you rarely need to be reminded. Occasionally, relax and let your mind wander without studying, then get back to your academic pursuits."
+        },
+        "夜型-一人-外-衝動": {
+            name: "🌌 Night Adventurer",
+            description: "You are a night adventurer who seeks new experiences and stays true to what you love. Learning freely in various places is what best develops your talents. Your strength lies in being yourself without constraints. Use this trait to your advantage and improve your grades."
+        },
+        "夜型-グループ-家-計画": {
+            name: "🌛 Night Team Player",
+            description: "You're the type who enjoys studying with friends during the night. Studying with someone at each other's homes while keeping on a call helps maintain a competitive edge. Since you tend to plan things out, it's best to study with someone who shares that approach. After tests, debrief with that friend to give yourself a break while still staying focused on your studies."
+        },
+        "夜型-グループ-家-衝動": {
+            name: "🎊 Night Dog",
+            description: "You're the type who studies best in a relaxed atmosphere with friends in a comfortable environment. Without too many restrictions, each person can work on the tasks they want to tackle, allowing you to develop your abilities naturally. Be mindful of not getting too swept up by others and maintain your focus on your own tasks as you study hard."
+        },
+        "夜型-グループ-外-計画": {
+            name: "🌠 Night Penguin",
+            description: "You're the type who gathers with friends after school for study sessions. Even within a group, you can steadily work on your own tasks without being overly influenced by others. The new environment will stimulate your brain, potentially boosting your productivity. While valuing occasional alone time, keep striving in your studies."
+        },
+        "夜型-グループ-外-衝動": {
+            name: "✨ Night Panda",
+            description: "You're a sociable, cheerful mood-maker. Your free-spirited nature inspires others, allowing you to enjoy group study sessions. If you get bored with your current subject, switch to one you enjoy immediately. The key to studying is maintaining consistency. Steer your own mood and keep pushing forward."
+        }
+    };
+
+    console.log("learningStyles定義完了:", learningStyles);
+
+    // 質問データ：各軸の10問ずつ
+    const questions = [
+        // クロノタイプ (chronotype) の質問 Q1-Q10
+        {
+            question: "Q1. When do you naturally prefer to wake up?",
+            choices: [
+                { text: "Before 7:00 AM", chronotype: 5 },
+                { text: "7:00 AM～9:00 AM", chronotype: 3 },
+                { text: "After 9:00 AM", chronotype: 1 }
+            ]
+        },
+        {
+            question: "Q2. When do you feel most mentally sharp?",
+            choices: [
+                { text: "Early morning", chronotype: 5 },
+                { text: "Evening", chronotype: 3 },
+                { text: "Late afternoon or night", chronotype: 1 }
+            ]
+        },
+        {
+            question: "Q3. How do you feel about early morning classes or meetings?",
+            choices: [
+                { text: "I enjoy them", chronotype: 5 },
+                { text: "I can manage", chronotype: 3 },
+                { text: "I dislike them", chronotype: 1 }
+            ]
+        },
+        {
+            question: "Q4. When is it difficult for you to focus on complicated tasks?",
+            choices: [
+                { text: "Night", chronotype: 5 },
+                { text: "Noon", chronotype: 3 },
+                { text: "Morning", chronotype: 1 }
+            ]
+        },
+        {
+            question: "Q5. How hungry do you feel during the first 30 minutes after waking up?",
+            choices: [
+                { text: "Very hungry", chronotype: 5 },
+                { text: "Hungry", chronotype: 4 },
+                { text: "Somewhat hungry", chronotype: 3 },
+                { text: "Not very hungry", chronotype: 2 },
+                { text: "Not hungry at all", chronotype: 1 }
+            ]
+        },
+        {
+            question: "Q6. If you had no commitments tommorow, when would you got to bed tonight compared to your usual bedtime?",
+            choices: [
+                { text: "Less than 1 hour later", chronotype: 5 },
+                { text: "1～2 hours later", chronotype: 3 },
+                { text: "More than 2 hours later", chronotype: 1 }
+            ]
+        },
+        {
+            question: "Q7. Which times do you want to be at peak performance?",
+            choices: [
+                { text: "8:00AM~10:00AM", chronotype: 5 },
+                { text: "11:00AM~1:00PM", chronotype: 3 },
+                { text: "After 2:00PM", chronotype: 1 }
+            ]
+        },
+        {
+            question: "Q8. Do you consider yourself to be a morning or an evening person?",
+            choices: [
+                { text: "Morning person", chronotype: 5 },
+                { text: "If I have to choose, I'm morning person", chronotype: 4 },
+                { text: "Neither", chronotype: 3 },
+                { text: "If I have to choose, I'm evening person", chronotype: 2 },
+                { text: "Evening person", chronotype: 1 }
+            ]
+        },
+        {
+            question: "Q9. What is your energy level like in the afternoon? ",
+            choices: [
+                { text: "I get little sleepiness but can bounce back quickly", chronotype: 5 },
+                { text: "It is hard to predict__it depend on my mood", chronotype: 3 },
+                { text: "I get sleepy and tired by then", chronotype: 1 }
+            ]
+        },
+        {
+            question: "Q10. What do you think about starting a school and work an early time?",
+            choices: [
+                { text: "I like it", chronotype: 5 },
+                { text: "It's okay", chronotype: 3 },
+                { text: "I don't like it", chronotype: 1 }
+            ]
+        },
+        
+        // with タイプ (withtype) の質問 Q11-Q20
+        {
+            question: "Q11. DO you like people?",
+            choices: [
+                { text: "I love people", withtype: 5 },
+                { text: "I like people sometimes", withtype: 4 },
+                { text: "I don't mind being with people", withtype: 3 },
+                { text: "I prefer to be alone", withtype: 2 },
+                { text: "I hate people", withtype: 1 }
+            ]
+        },
+        {
+            question: "Q12. When you have a difficult problem to solve, do you prefer to work with others or alone?",
+            choices: [
+                { text: "I prefer to work alone", withtype: 5 },
+                { text: "I don't mind working with others", withtype: 3 },
+                { text: "I prefer to work with others", withtype: 1 }
+            ]
+        },
+        {
+            question: "Q13. Do you like to compete with your friends?",
+            choices: [
+                { text: "Yes, I like competing", withtype: 5 },
+                { text: "Sometimes I like", withtype: 4 },
+                { text: "I don't mind competing", withtype: 3 },
+                { text: "I don't like competing", withtype: 1 }
+            ]
+        },
+        {
+            question: "Q14. I have an easily swayed personality",
+            choices: [
+                { text: "Absolutely yes", withtype: 5 },
+                { text: "Neither", withtype: 3 },
+                { text: "Absolutely No", withtype: 1 }
+            ]
+        },
+        {
+            question: "Q15. No matter who is around me, I can concentrate on my task even my friends",
+            choices: [
+                { text: "I can concentrate", withtype: 5 },
+                { text: "It doesn't affect me much", withtype: 3 },
+                { text: "I can't concentrate", withtype: 1 }
+            ]
+        },
+        {
+            question: "Q16. Do you like to teach someone?",
+            choices: [
+                { text: "I don't like to teach", withtype: 5 },
+                { text: "Depends on people", withtype: 3 },
+                { text: "I like to teach", withtype: 1 }
+            ]
+        },
+        {
+            question: "Q17. Do you want to share your study？",
+            choices: [
+                { text: "I prefer to study alone", withtype: 5 },
+                { text: "I don't mind sharing", withtype: 3 },
+                { text: "Yes, I like to share", withtype: 1 }
+            ]
+        },
+        {
+            question: "Q18. How do you feel about being with people for a long time?",
+            choices: [
+                { text: "I get tired", withtype: 5 },
+                { text: "It depends on the situation", withtype: 3 },
+                { text: "I love it", withtype: 1 }
+            ]
+        },
+        {
+            question: "Q19. I think I am always considerate of others",
+            choices: [
+                { text: "I am a bundle of considerations", withtype: 5 },
+                { text: "I try to be considerate", withtype: 3 },
+                { text: "I don't care much about others", withtype: 1 }
+            ]
+        },
+        {
+            question: "Q20. When I am alone in my room, I cannot concentrate on my task because there are too many distractions",
+            choices: [
+                { text: "No, I can concentrate", withtype: 5 },
+                { text: "Sometimes I can't", withtype: 3 },
+                { text: "Yes, I can't concentrate", withtype: 1 }
+            ]
+        },
+
+        // place タイプ (placetype) の質問 Q21-Q30
+        {
+            question: "Q21. Do you feel confortable in your own room?",
+            choices: [
+                { text: "Very comfortable", placetype: 5 },
+                { text: "Somewhat comfortable", placetype: 3 },
+                { text: "Not comfortable", placetype: 1 }
+            ]
+        },
+        {
+            question: "Q22. How often do you study in cafes or libraries?",
+            choices: [
+                { text: "Always", placetype: 5 },
+                { text: "Sometimes", placetype: 3 },
+                { text: "Never", placetype: 1 }
+            ]
+        },
+        {
+            question: "Q23. I am very particular about my room or interior design",
+            choices: [
+                { text: "Yes", placetype: 5 },
+                { text: "Somewhat", placetype: 3 },
+                { text: "No preference", placetype: 1 }
+            ]
+        },
+        {
+            question: "Q24. I'm good at adapting to new environments",
+            choices: [
+                { text: "Not good at it", placetype: 5 },
+                { text: "Sometimes", placetype: 3 },
+                { text: "Good at it", placetype: 1 }
+            ]
+        },
+        {
+            question: "Q25. I prefer to study in a familiar place rather than a new place",
+            choices: [
+                { text: "I don't like new places", placetype: 5 },
+                { text: "Sometimes I like new places", placetype: 3 },
+                { text: "I like new places", placetype: 1 }
+            ]
+        },
+        {
+            question: "Q26. I can do my task wherever I am",
+            choices: [
+                { text: "I can't", placetype: 5 },
+                { text: "Anywhere is fine", placetype: 3 },
+                { text: "I can do it anywhere", placetype: 1 }
+            ]
+        },
+        {
+            question: "Q27. What do you do in your room?",
+            choices: [
+                { text: "Only study", placetype: 5 },
+                { text: "Study and relax", placetype: 3 },
+                { text: "Do other activities including using your smartphone", placetype: 1 }
+            ]
+        },
+        {
+            question: "Q28. My family gets along well",
+            choices: [
+                { text: "There is a strong bond within my family", placetype: 5 },
+                { text: "I have a normal relationship with my family", placetype: 3 },
+                { text: "I don't get along well with my family", placetype: 1 }
+            ]
+        },
+        {
+            question: "Q29. I don't like crowded places",
+            choices: [
+                { text: "Strongly agree", placetype: 5 },
+                { text: "Neither agree nor disagree", placetype: 3 },
+                { text: "Disagree I don't care", placetype: 1 }
+            ]
+        },
+        {
+            question: "Q30. I tend to get used to a new place quickle",
+            choices: [
+                { text: "I don't get used to new places easily", placetype: 5 },
+                { text: "Neither easily nor slowly", placetype: 3 },
+                { text: "I get used to quickly", placetype: 1 }
+            ]
+        },
+
+        // practical タイプ (practicaltype) の質問 Q31-Q40
+        {
+            question: "Q31. I always make a study plan before exams",
+            choices: [
+                { text: "Very organized", practicaltype: 5 },
+                { text: "I want to do that, but I can't", practicaltype: 3 },
+                { text: "I don't make any study plans", practicaltype: 1 }
+            ]
+        },
+        {
+            question: "Q32. What do you think about sticking to a study routine",
+            choices: [
+                { text: "I like it and think it's important", practicaltype: 5 },
+                { text: "Sometimes", practicaltype: 3 },
+                { text: "I don't do it", practicaltype: 1 }
+            ]
+        },
+        {
+            question: "Q33. My learning style is...",
+            choices: [
+                { text: "Systematic and step by step", practicaltype: 5 },
+                { text: "Sometimes systematic, sometimes not", practicaltype: 3 },
+                { text: "Learning on the spot", practicaltype: 1 }
+            ]
+        },
+        {
+            question: "Q34. What do you think about knowing yourself",
+            choices: [
+                { text: "I know myself well", practicaltype: 5 },
+                { text: "I know myself a little", practicaltype: 3 },
+                { text: "I don't know myself well", practicaltype: 1 }
+            ]
+        },
+        {
+            question: "Q35. I am a perfectionist",
+            choices: [
+                { text: "Yes, I am the very perfectionist", practicaltype: 5 },
+                { text: "I'm not, but I try to be", practicaltype: 3 },
+                { text: "I don't care about perfection", practicaltype: 1 }
+            ]
+        },
+        {
+            question: "Q36. My moods are so up and down",
+            choices: [
+                { text: "No", practicaltype: 5 },
+                { text: "Neither agree nor disagree", practicaltype: 3 },
+                { text: "Exactly", practicaltype: 1 }
+            ]
+        },
+        {
+            question: "Q37. Do you regularly check your study progress and adjust your plan acordingly?",
+            choices: [
+                { text: "I do it regularly", practicaltype: 5 },
+                { text: "Sometimes", practicaltype: 3 },
+                { text: "Hardly ever", practicaltype: 1 }
+            ]
+        },
+        {
+            question: "Q38. What do you think about trying new study methods?",
+            choices: [
+                { text: "I'm cautious about trying new methods", practicaltype: 5 },
+                { text: "I try new methods when appropriate", practicaltype: 3 },
+                { text: "I like to try new methods quickly", practicaltype: 1 }
+            ]
+        },
+        {
+            question: "Q39. Do you have confidence in your time management skills?",
+            choices: [
+                { text: "Very confident", practicaltype: 5 },
+                { text: "Somewhat confident", practicaltype: 3 },
+                { text: "Not confident", practicaltype: 1 }
+            ]
+        },
+        {
+            question: "Q40. Do you have any routine in your daily life?",
+            choices: [
+                { text: "Yes, I value routines", practicaltype: 5 },
+                { text: "I have some routines", practicaltype: 3 },
+                { text: "I prefer to do new things every day", practicaltype: 1 }
+            ]
+        }
+    ];
+
+    console.log("questions定義完了: " + questions.length + "問");
+
+    let currentQuestion = 0;
+    let scores = {
+        chronotype: 0,
+        withtype: 0,
+        placetype: 0,
+        practicaltype: 0
+    };
+
+    function displayQuestion() {
+        const q = questions[currentQuestion];
+        document.getElementById("question").textContent = q.question;
+
+        const choicesDiv = document.getElementById("choices");
+        choicesDiv.innerHTML = "";
+
+        q.choices.forEach((choice) => {
+            const btn = document.createElement("button");
+            btn.className = "choice-btn";
+            btn.textContent = choice.text;
+            btn.onclick = () => handleAnswer(choice);
+            choicesDiv.appendChild(btn);
+        });
+
+        // プログレスバーの更新
+        const progress = ((currentQuestion + 1) / questions.length) * 100;
+        document.getElementById("progress-fill").style.width = progress + "%";
+    }
+
+    function handleAnswer(choice) {
+        // この選択肢の全スコア加算
+        if (choice.chronotype !== undefined) scores.chronotype += choice.chronotype;
+        if (choice.withtype !== undefined) scores.withtype += choice.withtype;
+        if (choice.placetype !== undefined) scores.placetype += choice.placetype;
+        if (choice.practicaltype !== undefined) scores.practicaltype += choice.practicaltype;
+
+        currentQuestion++;
+
+        if (currentQuestion < questions.length) {
+            displayQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        console.log("showResult関数実行");
+        console.log("スコア:", scores);
+        
+        document.getElementById("quiz-area").style.display = "none";
+        document.getElementById("result").style.display = "block";
+
+        // 各軸のスコアを表示
+        document.getElementById("chronotype-score").textContent = scores.chronotype;
+        document.getElementById("withtype-score").textContent = scores.withtype;
+        document.getElementById("placetype-score").textContent = scores.placetype;
+        document.getElementById("practicaltype-score").textContent = scores.practicaltype;
+
+        // 各軸のタイプを判定
+        const chrono = scores.chronotype >= 33 ? "朝型" : "夜型";
+        const with_ = scores.withtype >= 33 ? "一人" : "グループ";
+        const place = scores.placetype >= 33 ? "家" : "外";
+        const practical = scores.practicaltype >= 33 ? "計画" : "衝動";
+
+        console.log("判定結果:", { chrono, with_, place, practical });
+
+        // タイプ名を表示
+        document.getElementById("chronotype-type").textContent = chrono;
+        document.getElementById("withtype-type").textContent = with_;
+        document.getElementById("placetype-type").textContent = place;
+        document.getElementById("practicaltype-type").textContent = practical;
+
+        // キーを作る
+        const styleKey = chrono + "-" + with_ + "-" + place + "-" + practical;
+        
+        console.log("検索キー:", styleKey);
+        console.log("定義されているキー一覧:");
+        Object.keys(learningStyles).forEach(key => {
+            console.log("  - " + key);
+        });
+        
+        const style = learningStyles[styleKey];
+        console.log("取得されたスタイル:", style);
+
+        if (style) {
+            document.getElementById("result-title").textContent = style.name;
+            document.getElementById("result-desc").textContent = style.description;
+        } else {
+            //デバッグ用：どのキーが存在するか確認
+            console.error("スタイルが見つかりません。検索キー:", styleKey);
+            console.error("利用可能なキー:", Object.keys(learningStyles));
+            
+            // デバッグ用：とりあえず最初のスタイルを表示
+            const firstKey = Object.keys(learningStyles)[0];
+            const fallbackStyle = learningStyles[firstKey];
+            document.getElementById("result-title").textContent = fallbackStyle.name + " (デバッグ表示)";
+            document.getElementById("result-desc").textContent = "キー「" + styleKey + "」が見つかりません。\n\n利用可能なキー:\n" + Object.keys(learningStyles).join("\n");
+        }
+    }
+
+    console.log("displayQuestion()実行");
+    displayQuestion();
+</script>
+
+</body>
+</html>
